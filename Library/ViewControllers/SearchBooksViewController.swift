@@ -8,14 +8,10 @@
 
 import UIKit
 
-class SearchBooksViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+class SearchBooksViewController: BaseBooksTableViewController, UISearchBarDelegate {
 
-    let showBookDetailsSegueIdentifier = "showBookDetails"
-    @IBOutlet weak var searchBooksTableView: UITableView!
-    @IBOutlet weak var blockingView: UIView!
     @IBOutlet weak var searchBar: UISearchBar!
-    var books = [Book]()
-    var selectedBook: Book?
+    @IBOutlet weak var blockingView: UIView!
     var bookApiRequest = BookApiRequest() as BookApiRequestProtocol
 
     func injectDependencies(bookApiRequest: BookApiRequestProtocol) {
@@ -25,35 +21,12 @@ class SearchBooksViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-         self.searchBooksTableView.register(UINib(nibName: SearchBooksTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: SearchBooksTableViewCell.identifier)
         self.addAccessibilityIdentifiers()
     }
 
-    func addAccessibilityIdentifiers() {
+    override func addAccessibilityIdentifiers() {
         self.searchBar.accessibilityIdentifier = "SearchBooksViewController.SearchBar"
-        self.searchBooksTableView.accessibilityIdentifier = "SearchBooksViewController.SearchBooksTableView"
         self.blockingView.accessibilityIdentifier = "SearchBooksViewController.BlockingView"
-    }
-
-    // MARK: - UITableViewDataSource
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.books.count
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: SearchBooksTableViewCell.identifier, for: indexPath)
-        if let searchBooksTableViewCell = cell as? SearchBooksTableViewCell {
-            searchBooksTableViewCell.updateCell(withBook: self.books[indexPath.row])
-        }
-        return cell
-    }
-
-    // MARK: - UITableViewDelegate
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.selectedBook = books[indexPath.row]
-        self.performSegue(withIdentifier: showBookDetailsSegueIdentifier, sender: self)
     }
 
     // MARK: - UISearchBarDelegate
@@ -67,9 +40,9 @@ class SearchBooksViewController: UIViewController, UITableViewDelegate, UITableV
         bookApiRequest.getBooks(forSearchText: searchText, success: { books in
             self.books = books
             DispatchQueue.main.async {
-                self.searchBooksTableView.reloadData()
+                self.booksTableView.reloadData()
                 if self.books.count > 0 {
-                    self.searchBooksTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+                    self.booksTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
                 }
                 self.blockingView.isHidden = true
             }
@@ -79,13 +52,6 @@ class SearchBooksViewController: UIViewController, UITableViewDelegate, UITableV
                 self.blockingView.isHidden = true
             }
         })
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let bookDetailsViewController = segue.destination as? BookDetailsViewController else {
-            return
-        }
-        bookDetailsViewController.book = self.selectedBook
     }
 
 }

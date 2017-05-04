@@ -28,6 +28,8 @@
 		E4A32C751EBAB8AB00412D8D /* FakeBookApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A32C741EBAB8AB00412D8D /* FakeBookApiRequest.swift */; };
 		E4A32C771EBABB9000412D8D /* MockURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A32C761EBABB9000412D8D /* MockURLSession.swift */; };
 		E4A32C791EBABFED00412D8D /* BookDetailsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4A32C781EBABFED00412D8D /* BookDetailsViewControllerTests.swift */; };
+		E4FDD9731EBAE022009734B5 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FDD9721EBAE022009734B5 /* FavoritesViewController.swift */; };
+		E4FDD9751EBAF3A9009734B5 /* BaseBooksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4FDD9741EBAF3A9009734B5 /* BaseBooksTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +82,8 @@
 		E4A32C741EBAB8AB00412D8D /* FakeBookApiRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeBookApiRequest.swift; sourceTree = "<group>"; };
 		E4A32C761EBABB9000412D8D /* MockURLSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockURLSession.swift; sourceTree = "<group>"; };
 		E4A32C781EBABFED00412D8D /* BookDetailsViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookDetailsViewControllerTests.swift; sourceTree = "<group>"; };
+		E4FDD9721EBAE022009734B5 /* FavoritesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		E4FDD9741EBAF3A9009734B5 /* BaseBooksTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseBooksTableViewController.swift; sourceTree = "<group>"; };
 		FDCA89D827239609A51A9AED /* Pods_Library.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Library.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -217,6 +221,8 @@
 			children = (
 				E43FFFE31EB9A14900D65A4C /* BookDetailsViewController.swift */,
 				E43FFFE41EB9A14900D65A4C /* SearchBooksViewController.swift */,
+				E4FDD9721EBAE022009734B5 /* FavoritesViewController.swift */,
+				E4FDD9741EBAF3A9009734B5 /* BaseBooksTableViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -513,7 +519,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E43FFFEB1EB9A14900D65A4C /* SearchBooksViewController.swift in Sources */,
+				E4FDD9751EBAF3A9009734B5 /* BaseBooksTableViewController.swift in Sources */,
 				E40310101EB83AB30069BED0 /* AppDelegate.swift in Sources */,
+				E4FDD9731EBAE022009734B5 /* FavoritesViewController.swift in Sources */,
 				E43FFFE81EB9A14900D65A4C /* BookApiRequest.swift in Sources */,
 				E43FFFEA1EB9A14900D65A4C /* BookDetailsViewController.swift in Sources */,
 				E43FFFEC1EB9A14900D65A4C /* SearchBooksTableViewCell.swift in Sources */,

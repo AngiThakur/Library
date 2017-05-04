@@ -10,11 +10,25 @@ import UIKit
 
 class BookDetailsViewController: UIViewController {
 
-    @IBOutlet weak var bookThumbnail: UIImageView!
-    @IBOutlet weak var bookAuthors: UILabel!
-    @IBOutlet weak var bookCategories: UILabel!
-    @IBOutlet weak var bookDescription: UILabel!
+    @IBOutlet weak var bookThumbnailImageView: UIImageView!
+    @IBOutlet weak var bookAuthorsLabel: UILabel!
+    @IBOutlet weak var bookCategoriesLabel: UILabel!
+    @IBOutlet weak var bookDescriptionLabel: UILabel!
+    @IBOutlet weak var addOrRemoveFromFavoritesButton: UIButton!
     var book: Book!
+
+    var favoriteBooks : [Book] {
+        get {
+            return (UIApplication.shared.delegate as! AppDelegate).favoriteBooks
+        }
+        set {
+            (UIApplication.shared.delegate as! AppDelegate).favoriteBooks = newValue
+        }
+    }
+
+    var isFavorite: Bool {
+        return favoriteBooks.filter({$0.volumeId == book.volumeId}).count > 0
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,11 +39,28 @@ class BookDetailsViewController: UIViewController {
 
     func updateScreen() {
         if let thumbnailUrl = book.thumbnail, let data = try? Data(contentsOf: thumbnailUrl) {
-            bookThumbnail.image = UIImage(data: data)
+            bookThumbnailImageView.image = UIImage(data: data)
         }
-        bookAuthors.text = book.formattedAuthorsString
-        bookCategories.text = book.formattedCategoriesString
-        bookDescription.text = book.description
+        bookAuthorsLabel.text = book.formattedAuthorsString
+        bookCategoriesLabel.text = book.formattedCategoriesString
+        bookDescriptionLabel.text = book.description
+        if isFavorite {
+            addOrRemoveFromFavoritesButton.setTitle("Remove From Favorites", for: .normal)
+        }
+        else {
+            addOrRemoveFromFavoritesButton.setTitle("Add To Favorites", for: .normal)
+        }
+    }
+
+    @IBAction func addOrRemoveFromFavoritedButtonTapped() {
+        if isFavorite {
+            favoriteBooks = favoriteBooks.filter({$0.volumeId != book.volumeId})
+            addOrRemoveFromFavoritesButton.setTitle("Add To Favorites", for: .normal)
+        }
+        else {
+            favoriteBooks.append(book)
+            addOrRemoveFromFavoritesButton.setTitle("Remove From Favorites", for: .normal)
+        }
     }
     
 }
